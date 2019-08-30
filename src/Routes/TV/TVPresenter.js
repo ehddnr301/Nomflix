@@ -1,8 +1,34 @@
 import React from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
+import Loader from "../../Components/Loader";
+import Section from "../../Components/Section";
 
-const TVPresenter = ({ popular, nowPlaying, error, loading }) => "TV";
+const Container = styled.div`
+  padding: 0 15px;
+`;
+
+const TVPresenter = ({ popular, nowPlaying, error, loading }) =>
+  loading ? (
+    <Loader></Loader>
+  ) : (
+    <Container>
+      {nowPlaying && nowPlaying.length > 0 && (
+        <Section title="NowPlaying">
+          {nowPlaying.map(movie => (
+            <span key={movie.DOCID}>{movie.title}</span>
+          ))}
+        </Section>
+      )}
+      {popular && popular.length > 0 && (
+        <Section title="Popular">
+          {popular.map(movie => (
+            <span key={movie.DOCID}>{movie.title}</span>
+          ))}
+        </Section>
+      )}
+    </Container>
+  );
 
 TVPresenter.propTypes = {
   popular: PropTypes.array,
