@@ -2,31 +2,22 @@ import React, { useState, useEffect } from "react";
 import TVPresenter from "./TVPresenter";
 import { korApi } from "../../api";
 
-const DetailContainer = () => {
-  const [topRated, setTopRated] = useState(null);
+const TVContainer = () => {
   const [popular, setPopular] = useState(null);
-  const [airingToday, setAiringToday] = useState(null);
+  const [nowPlaying, setNowPlaying] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
 
   const didMount = async () => {
-    const {
-      data: { Data }
-    } = await korApi.movieList();
-    console.log(Data[0].Result);
     try {
-      //   const {
-      //     data: { results: topRated }
-      //   } = await tvApi.topRated();
-      //   const {
-      //     data: { results: popular }
-      //   } = await tvApi.popular();
-      //   const {
-      //     data: { results: airingToday }
-      //   } = await tvApi.airingToday();
-      //   setAiringToday(airingToday);
-      //   setPopular(popular);
-      //   setTopRated(topRated);
+      const {
+        data: { Data: popular }
+      } = await korApi.popular();
+      const {
+        data: { Data: nowPlaying }
+      } = await korApi.nowPlaying();
+      setPopular(popular[0].Result);
+      setNowPlaying(nowPlaying[0].Result);
     } catch {
       setError("Can't Find Any Show");
     } finally {
@@ -40,13 +31,12 @@ const DetailContainer = () => {
 
   return (
     <TVPresenter
-      topRated={topRated}
       popular={popular}
-      airingToday={airingToday}
+      nowPlaying={nowPlaying}
       error={error}
       loading={loading}
     />
   );
 };
 
-export default DetailContainer;
+export default TVContainer;

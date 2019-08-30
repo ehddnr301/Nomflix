@@ -1,4 +1,8 @@
 import axios from "axios";
+const date = new Date();
+const year = date.getFullYear();
+const month = date.getMonth() + 1;
+const day = date.getDate();
 
 const api = axios.create({
   baseURL: "https://api.themoviedb.org/3/",
@@ -12,6 +16,7 @@ const api2 = axios.create({
   baseURL:
     "http://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json.jsp?",
   params: {
+    collection: "kmdb_new",
     ServiceKey: "B47C3DM0LF8H32J5ZQPF"
   }
 });
@@ -35,12 +40,24 @@ export const moviesApi = {
 };
 
 export const korApi = {
-  movieList: () =>
+  popular: () =>
     api2.get("", {
       params: {
-        collection: "kmdb_new",
         listCount: "50",
-        releaseDts: "20190801",
+        releaseDts: `${year}${month < 10 ? `0${month}` : month}${
+          day - 20 < 0 ? (day < 10 ? `0${day}` : day) : day - 20
+        }`,
+        nation: "대한민국",
+        type: "극영화"
+      }
+    }),
+  nowPlaying: () =>
+    api2.get("", {
+      params: {
+        listCount: "50",
+        releaseDts: `${year}${month < 10 ? `0${month}` : month}${
+          day - 20 < 0 ? (day < 10 ? `0${day}` : day) : day - 20
+        }`,
         nation: "대한민국"
       }
     }),

@@ -22,7 +22,7 @@ const DetailContainer = props => {
     if (isNaN(parsedId)) {
       return push("/");
     }
-    let results = null;
+    let result = null;
     try {
       if (isMovie) {
         ({ data: result } = await moviesApi.movieDetail(parsedId));

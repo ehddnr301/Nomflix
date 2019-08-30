@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import SearchPresenter from "./SearchPresenter";
-import { moviesApi, tvApi } from "../../api";
+import { moviesApi, korApi } from "../../api";
 
 const SearchContainer = () => {
   const [movieResults, setMovieResults] = useState(null);
@@ -15,6 +15,13 @@ const SearchContainer = () => {
       const {
         data: { results: movieResults }
       } = await moviesApi.search(searchTerm);
+      const {
+        data: { Data: tvResults }
+      } = await korApi.searchKor(searchTerm);
+      setMovieResults(movieResults);
+      //
+      setTvResults(tvResults[0].Result);
+      //
     } catch {
       setError("Can't Find anything");
     } finally {
