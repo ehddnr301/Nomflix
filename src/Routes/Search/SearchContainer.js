@@ -21,6 +21,7 @@ const SearchContainer = () => {
       setMovieResults(movieResults);
       //
       setTvResults(tvResults[0].Result);
+
       //
     } catch {
       setError("Can't Find anything");
@@ -30,9 +31,17 @@ const SearchContainer = () => {
   };
 
   const handleSubmit = event => {
+    event.preventDefault();
     if (searchTerm !== null) {
       searchByTerm();
     }
+  };
+
+  const updateTerm = event => {
+    const {
+      target: { value }
+    } = event;
+    setSearchTerm(value);
   };
 
   return (
@@ -43,6 +52,7 @@ const SearchContainer = () => {
       error={error}
       loading={loading}
       handleSubmit={handleSubmit}
+      updateTerm={updateTerm}
     />
   );
 };

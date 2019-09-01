@@ -6,8 +6,9 @@ const Container = styled.div`
   width: 100vw;
   display: flex;
   justify-content: center;
-  font-size: 28px;
-  margin-top: 20px;
+  align-items: center;
+  font-size: 100px;
+  padding-bottom: 200px;
 `;
 
 export default () => (
