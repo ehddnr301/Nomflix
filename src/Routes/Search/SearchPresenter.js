@@ -5,6 +5,7 @@ import Loader from "../../Components/Loader";
 import Section from "../../Components/Section";
 import Message from "../../Components/Message";
 import Poster from "../../Components/Poster";
+import Helmet from "react-helmet";
 
 const Container = styled.div`
   width: 100%;
@@ -43,6 +44,9 @@ const SearchPresenter = ({
   updateTerm
 }) => (
   <Container>
+    <Helmet>
+      <title>Search | Nomflix</title>
+    </Helmet>
     <Form onSubmit={handleSubmit}>
       <Input
         onChange={updateTerm}

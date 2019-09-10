@@ -18,7 +18,6 @@ const TVContainer = () => {
       } = await korApi.nowPlaying();
       setPopular(popular[0].Result);
       setNowPlaying(nowPlaying[0].Result);
-      console.log(popular[0].Result);
     } catch {
       setError("Can't Find Any Show");
     } finally {

@@ -17,7 +17,7 @@ const api2 = axios.create({
     "http://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json.jsp?",
   params: {
     collection: "kmdb_new",
-    ServiceKey: "B47C3DM0LF8H32J5ZQPF"
+    ServiceKey: "EMCVJJ74ZMX68GH131Q5"
   }
 });
 
@@ -65,6 +65,12 @@ export const korApi = {
     api2.get("", {
       params: {
         title: term
+      }
+    }),
+  korDetail: id =>
+    api2.get("", {
+      params: {
+        movieSeq: id
       }
     })
 };

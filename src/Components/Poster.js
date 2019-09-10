@@ -25,6 +25,7 @@ const Rating = styled.span`
 `;
 
 const ImageContainer = styled.div`
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   margin-bottom: 5px;
   position: relative;
   &:hover {
@@ -53,11 +54,13 @@ const Poster = ({ id, imageUrl, title, rating, year, isMovie = false }) => (
       <ImageContainer>
         <Image
           bgUrl={
-            imageUrl
+            isMovie
               ? `https://image.tmdb.org/t/p/w300${imageUrl}`
-              : isMovie
+              : imageUrl === ""
               ? require("../assets/noPosterSmall.png")
-              : `http://www.kmdb.or.kr/vod/vod_basic.asp?nation=K&p_dataid=${imageUrl}`
+              : imageUrl.includes("|")
+              ? imageUrl.substring(0, imageUrl.indexOf("|"))
+              : imageUrl
           }
         />
         <Rating>
