@@ -48,10 +48,10 @@ export default withRouter(({ location: { pathname } }) => (
     <Title>nomflix</Title>
     <List>
       <Item current={pathname === "/"}>
-        <SLink to="/">Movies</SLink>
+        <SLink to="/">IMDB</SLink>
       </Item>
       <Item current={pathname === "/tv"}>
-        <SLink to="/tv">TV</SLink>
+        <SLink to="/tv">KMDB</SLink>
       </Item>
       <Item current={pathname === "/search"}>
         <SLink to="/search">Search</SLink>

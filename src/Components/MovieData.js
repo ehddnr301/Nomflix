@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
+import DHeader from "./DHeader";
 
 const Data = styled.div`
   width: 70%;
@@ -15,7 +16,13 @@ const ItemContainer = styled.div`
   margin: 20px 0;
 `;
 
-const Item = styled.span``;
+const Item = styled.span`
+  a {
+    background-color: #f1c40f;
+    color: black;
+    padding: 1px 2px;
+  }
+`;
 
 const Divider = styled.span`
   margin: 0 10px;
@@ -28,23 +35,16 @@ const Overview = styled.p`
   width: 50%;
 `;
 
-const MovieData = ({ result }) => (
-  console.log(result),
-  (
+const MovieData = ({ result }) => {
+  const [mode, setMode] = useState("youtube");
+
+  return (
     <Data>
-      <Title>
-        {result.original_title ? result.original_title : result.original_name}
-      </Title>
+      <Title>{result.original_title}</Title>
       <ItemContainer>
-        <Item>
-          {result.release_date
-            ? result.release_date.substring(0, 4)
-            : result.first_air_date.substring(0, 4)}
-        </Item>
+        <Item>{result.release_date.substring(0, 4)}</Item>
         <Divider>•</Divider>
-        <Item>
-          {result.runtime ? result.runtime : result.episode_run_time[0]} min
-        </Item>
+        <Item>{result.runtime} min</Item>
         <Divider>•</Divider>
         <Item>
           {result.genres &&
@@ -54,11 +54,16 @@ const MovieData = ({ result }) => (
                 : `${genre.name} / `
             )}
         </Item>
+        <Divider>•</Divider>
+        <Item>
+          <a href={`https://www.imdb.com/title/${result.imdb_id}`}>IMDB</a>
+        </Item>
       </ItemContainer>
       <Overview>{result.overview}</Overview>
+      <DHeader mode={mode} setMode={setMode} result={result} />
     </Data>
-  )
-);
+  );
+};
 
 MovieData.propTypes = {
   result: PropTypes.object

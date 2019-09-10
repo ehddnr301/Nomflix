@@ -8,7 +8,7 @@ import Poster from "../../Components/Poster";
 import Helmet from "react-helmet";
 
 const Container = styled.div`
-  padding: 0px 10px;
+  padding: 10px 10px;
 `;
 
 const MoviePresenter = ({ nowPlaying, upcoming, popular, error, loading }) =>

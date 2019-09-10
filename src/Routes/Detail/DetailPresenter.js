@@ -3,6 +3,7 @@ import styled from "styled-components";
 import PropTypes from "prop-types";
 import Loader from "../../Components/Loader";
 import MovieData from "../../Components/MovieData";
+import KmovieData from "../../Components/KmovieData";
 
 const Container = styled.div`
   height: calc(100vh - 50px);
@@ -52,9 +53,11 @@ const DetailPresenter = ({ result, loading, error, isMovie }) =>
         bgImage={
           isMovie && result
             ? `https://image.tmdb.org/t/p/original${result.backdrop_path}`
-            : result.posters.includes("|")
-            ? result.posters.substring(0, result.posters.indexOf("|"))
             : result.posters
+            ? result.posters.includes("|")
+              ? result.posters.substring(0, result.posters.indexOf("|"))
+              : result.posters
+            : ""
         }
       />
       <Content>
@@ -64,12 +67,18 @@ const DetailPresenter = ({ result, loading, error, isMovie }) =>
               ? result.poster_path
                 ? `https://image.tmdb.org/t/p/original${result.poster_path}`
                 : require("../../assets/noPosterSmall.png")
-              : result.posters.includes("|")
-              ? result.posters.substring(0, result.posters.indexOf("|"))
               : result.posters
+              ? result.posters.includes("|")
+                ? result.posters.substring(0, result.posters.indexOf("|"))
+                : result.posters
+              : ""
           }
         />
-        <MovieData result={result}></MovieData>
+        {isMovie ? (
+          <MovieData result={result}></MovieData>
+        ) : (
+          <KmovieData result={result}></KmovieData>
+        )}
       </Content>
     </Container>
   );
