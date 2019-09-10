@@ -20,7 +20,7 @@ const TVPresenter = ({ popular, nowPlaying, error, loading }) =>
         <title>korMovie | Nomflix</title>
       </Helmet>
       {nowPlaying && nowPlaying.length > 0 && (
-        <Section title="NowPlaying">
+        <Section title="한국영화">
           {nowPlaying.map(t => (
             <Poster
               key={parseInt(t.movieSeq)}
@@ -35,7 +35,7 @@ const TVPresenter = ({ popular, nowPlaying, error, loading }) =>
         </Section>
       )}
       {popular && popular.length > 0 && (
-        <Section title="Popular">
+        <Section title="추천영화">
           {popular.map(t => (
             <Poster
               key={parseInt(t.movieSeq)}
